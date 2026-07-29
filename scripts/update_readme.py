@@ -219,7 +219,7 @@ def build_lines(s, P):
         seg_dots(P, "OS:", "macOS, Linux", INFO_W),
         seg_dots(P, "Uptime:", life_uptime(), INFO_W),
         seg_dots(P, "Kernel:", "Works On My Machine™ Certified", INFO_W),
-        seg_dots(P, "IDE:", "Claude Code, VS Code", INFO_W),
+        seg_dots(P, "IDE:", "Claude Code, Cursor, Codex, VS Code", INFO_W),
         [],
         seg_dots(P, "Languages:", s["languages"], INFO_W),
         seg_dots(P, "Hobbies:", "Chess", INFO_W),

@@ -25,6 +25,7 @@ THEMES = {
         "green": "#3fb950",
         "red": "#f85149",
         "purple": "#a371f7",
+        "gopher": "#00add8",
     },
     "light": {
         "bg": "#ffffff",
@@ -36,6 +37,7 @@ THEMES = {
         "green": "#1a7f37",
         "red": "#cf222e",
         "purple": "#8250df",
+        "gopher": "#007d9c",
     },
 }
 
@@ -180,7 +182,7 @@ def fetch_stats():
     }
 
 
-ASCII = r"""
+ADN_ART = r"""
  _______  ______   _
 (  ___  )(  __  \ ( (    /|
 | (   ) || (  \  )|  \  ( |
@@ -189,6 +191,20 @@ ASCII = r"""
 | (   ) || |   ) || | \   |
 | )   ( || (__/  )| )  \  |
 |/     \|(______/ |/    )_)
+""".strip("\n")
+
+GOPHER_ART = r"""
+         ,_---~~~~~----._
+  _,,_,*^____      _____``*g*"*,
+ / __/ /'     ^.  /      \ ^@q   f
+[  @f | @))    |  | @))   l  0 _/
+ \`/   \~____ / __ \_____/    \
+  |           _l__l_           I
+  }          [______]           I
+  ]            | | |            |
+  ]             ~ ~             |
+  |                            |
+   |                           |
 """.strip("\n")
 
 
@@ -225,10 +241,9 @@ def build_lines(s, P):
         seg_dots(P, "Kernel:", "Works On My Machine™ Certified", INFO_W),
         seg_dots(P, "IDE:", "Claude Code, Cursor, Codex, VS Code", INFO_W),
         seg_dots(P, "Memory:", "99% used (mostly Stack Overflow tabs)", INFO_W),
-        seg_dots(P, "Processes:", "chess.com running in background", INFO_W),
         [],
         seg_dots(P, "Languages:", s["languages"], INFO_W),
-        seg_dots(P, "Hobbies:", "Chess", INFO_W),
+        seg_dots(P, "Hobbies:", "Chess (lichess.org running in background)", INFO_W),
         [],
         [("─ Contact", P["accent"])],
         seg_dots(P, "Email:", "adnvilla@gmail.com", INFO_W),
@@ -280,8 +295,12 @@ def render_svg(s, theme):
     P = THEMES[theme]
     char_w = 8.6
     line_h = 20
-    art_lines = ASCII.split("\n")
-    art_w = max(len(l) for l in art_lines)
+    art_lines = (
+        [(l, "accent") for l in ADN_ART.split("\n")]
+        + [("", "accent")]
+        + [(l, "gopher") for l in GOPHER_ART.split("\n")]
+    )
+    art_w = max(len(l) for l, _ in art_lines)
     art_x = 28
     info_x = art_x + int(art_w * char_w) + 40
     width = info_x + int(INFO_W * char_w) + 34
@@ -296,9 +315,11 @@ def render_svg(s, theme):
         "<style>text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 14px; }</style>",
         f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8" fill="{P["bg"]}" stroke="{P["border"]}"/>',
     ]
-    for i, line in enumerate(art_lines):
+    for i, (line, color) in enumerate(art_lines):
+        if not line:
+            continue
         parts.append(
-            f'<text x="{art_x}" y="{art_top + i * line_h}" xml:space="preserve" fill="{P["accent"]}">{esc(line)}</text>'
+            f'<text x="{art_x}" y="{art_top + i * line_h}" xml:space="preserve" fill="{P[color]}">{esc(line)}</text>'
         )
     for i, segments in enumerate(info):
         if not segments:

@@ -3,6 +3,7 @@
 import json
 import os
 import time
+import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
@@ -23,6 +24,7 @@ THEMES = {
         "accent": "#58a6ff",
         "green": "#3fb950",
         "red": "#f85149",
+        "purple": "#a371f7",
     },
     "light": {
         "bg": "#ffffff",
@@ -33,6 +35,7 @@ THEMES = {
         "accent": "#0969da",
         "green": "#1a7f37",
         "red": "#cf222e",
+        "purple": "#8250df",
     },
 }
 
@@ -134,6 +137,25 @@ def fetch_stats():
                     additions += w["a"]
                     deletions += w["d"]
 
+    def search_count(q):
+        try:
+            return get(f"{API}/search/issues?q={urllib.parse.quote(q)}")["total_count"]
+        except Exception:
+            return 0
+
+    followup = {
+        "issues_repos_open": search_count(f"user:{USER} is:issue is:open"),
+        "issues_repos_closed": search_count(f"user:{USER} is:issue is:closed"),
+        "issues_mine_open": search_count(f"author:{USER} is:issue is:open"),
+        "issues_mine_closed": search_count(f"author:{USER} is:issue is:closed"),
+        "prs_repos_open": search_count(f"user:{USER} is:pr is:open"),
+        "prs_repos_closed": search_count(f"user:{USER} is:pr is:closed is:unmerged"),
+        "prs_repos_merged": search_count(f"user:{USER} is:pr is:merged"),
+        "prs_mine_open": search_count(f"author:{USER} is:pr is:open"),
+        "prs_mine_closed": search_count(f"author:{USER} is:pr is:closed is:unmerged"),
+        "prs_mine_merged": search_count(f"author:{USER} is:pr is:merged"),
+    }
+
     langs = {}
     for r in repos:
         if r["language"]:
@@ -150,6 +172,7 @@ def fetch_stats():
         "deletions": deletions,
         "loc": additions - deletions,
         "languages": top_langs,
+        **followup,
     }
 
 
@@ -173,6 +196,12 @@ def seg_dots(P, label, value, width, value_color=None):
         (" " + "." * max(pad, 3) + " ", P["dots"]),
         (value, value_color or P["fg"]),
     ]
+
+
+def seg_multi(P, label, parts, width):
+    vlen = sum(len(t) for t, _ in parts)
+    pad = width - len(label) - vlen - 2
+    return [(label, P["label"]), (" " + "." * max(pad, 3) + " ", P["dots"])] + parts
 
 
 def esc(t):
@@ -203,6 +232,30 @@ def build_lines(s, P):
         [("─ GitHub Stats", P["accent"])],
         seg_dots(P, *left_pairs[0], left_w) + sep + seg_dots(P, "Stars:", f'{s["stars"]:,}', right_w),
         seg_dots(P, *left_pairs[1], left_w) + sep + seg_dots(P, "Followers:", f'{s["followers"]:,}', right_w),
+        seg_multi(P, "Issues on repos:", [
+            (f'{s["issues_repos_open"]:,} open', P["green"]),
+            (" / ", P["dots"]),
+            (f'{s["issues_repos_closed"]:,} closed', P["purple"]),
+        ], INFO_W),
+        seg_multi(P, "Issues by me:", [
+            (f'{s["issues_mine_open"]:,} open', P["green"]),
+            (" / ", P["dots"]),
+            (f'{s["issues_mine_closed"]:,} closed', P["purple"]),
+        ], INFO_W),
+        seg_multi(P, "PRs on repos:", [
+            (f'{s["prs_repos_open"]:,} open', P["green"]),
+            (" / ", P["dots"]),
+            (f'{s["prs_repos_closed"]:,} closed', P["red"]),
+            (" / ", P["dots"]),
+            (f'{s["prs_repos_merged"]:,} merged', P["purple"]),
+        ], INFO_W),
+        seg_multi(P, "PRs by me:", [
+            (f'{s["prs_mine_open"]:,} open', P["green"]),
+            (" / ", P["dots"]),
+            (f'{s["prs_mine_closed"]:,} closed', P["red"]),
+            (" / ", P["dots"]),
+            (f'{s["prs_mine_merged"]:,} merged', P["purple"]),
+        ], INFO_W),
         [
             ("Lines of Code: ", P["label"]),
             (f'{s["loc"]:,} ', P["fg"]),

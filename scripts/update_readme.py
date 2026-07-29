@@ -120,10 +120,13 @@ def fetch_stats():
         commits = 0
 
     contributed = 0
+    contributions = 0
     if TOKEN:
         try:
-            q = f'{{ user(login: "{USER}") {{ repositoriesContributedTo(contributionTypes: [COMMIT, PULL_REQUEST], first: 1) {{ totalCount }} }} }}'
-            contributed = graphql(q)["data"]["user"]["repositoriesContributedTo"]["totalCount"]
+            q = f'{{ user(login: "{USER}") {{ repositoriesContributedTo(contributionTypes: [COMMIT, PULL_REQUEST], first: 1) {{ totalCount }} contributionsCollection {{ contributionCalendar {{ totalContributions }} }} }} }}'
+            u = graphql(q)["data"]["user"]
+            contributed = u["repositoriesContributedTo"]["totalCount"]
+            contributions = u["contributionsCollection"]["contributionCalendar"]["totalContributions"]
         except Exception:
             pass
 
@@ -165,6 +168,7 @@ def fetch_stats():
     return {
         "repos": user["public_repos"],
         "contributed": contributed,
+        "contributions": contributions,
         "stars": stars,
         "commits": commits,
         "followers": user["followers"],
@@ -220,6 +224,8 @@ def build_lines(s, P):
         seg_dots(P, "Uptime:", life_uptime(), INFO_W),
         seg_dots(P, "Kernel:", "Works On My Machine™ Certified", INFO_W),
         seg_dots(P, "IDE:", "Claude Code, Cursor, Codex, VS Code", INFO_W),
+        seg_dots(P, "Memory:", "99% used (mostly Stack Overflow tabs)", INFO_W),
+        seg_dots(P, "Processes:", "chess.com running in background", INFO_W),
         [],
         seg_dots(P, "Languages:", s["languages"], INFO_W),
         seg_dots(P, "Hobbies:", "Chess", INFO_W),
@@ -232,6 +238,7 @@ def build_lines(s, P):
         [("─ GitHub Stats", P["accent"])],
         seg_dots(P, *left_pairs[0], left_w) + sep + seg_dots(P, "Stars:", f'{s["stars"]:,}', right_w),
         seg_dots(P, *left_pairs[1], left_w) + sep + seg_dots(P, "Followers:", f'{s["followers"]:,}', right_w),
+        seg_dots(P, "Contributions:", f'{s["contributions"]:,} in the last year', INFO_W),
         seg_multi(P, "Issues on repos:", [
             (f'{s["issues_repos_open"]:,} open', P["green"]),
             (" / ", P["dots"]),

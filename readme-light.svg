@@ -1,31 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="832" height="504" viewBox="0 0 832 504">
+<svg xmlns="http://www.w3.org/2000/svg" width="832" height="564" viewBox="0 0 832 564">
 <style>text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 14px; }</style>
-<rect x="0.5" y="0.5" width="831" height="503" rx="8" fill="#ffffff" stroke="#d0d7de"/>
-<text x="28" y="180" xml:space="preserve" fill="#0969da"> _______  ______   _</text>
-<text x="28" y="200" xml:space="preserve" fill="#0969da">(  ___  )(  __  \ ( (    /|</text>
-<text x="28" y="220" xml:space="preserve" fill="#0969da">| (   ) || (  \  )|  \  ( |</text>
-<text x="28" y="240" xml:space="preserve" fill="#0969da">| (___) || |   ) ||   \ | |</text>
-<text x="28" y="260" xml:space="preserve" fill="#0969da">|  ___  || |   | || (\ \) |</text>
-<text x="28" y="280" xml:space="preserve" fill="#0969da">| (   ) || |   ) || | \   |</text>
-<text x="28" y="300" xml:space="preserve" fill="#0969da">| )   ( || (__/  )| )  \  |</text>
-<text x="28" y="320" xml:space="preserve" fill="#0969da">|/     \|(______/ |/    )_)</text>
+<rect x="0.5" y="0.5" width="831" height="563" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+<text x="28" y="210" xml:space="preserve" fill="#0969da"> _______  ______   _</text>
+<text x="28" y="230" xml:space="preserve" fill="#0969da">(  ___  )(  __  \ ( (    /|</text>
+<text x="28" y="250" xml:space="preserve" fill="#0969da">| (   ) || (  \  )|  \  ( |</text>
+<text x="28" y="270" xml:space="preserve" fill="#0969da">| (___) || |   ) ||   \ | |</text>
+<text x="28" y="290" xml:space="preserve" fill="#0969da">|  ___  || |   | || (\ \) |</text>
+<text x="28" y="310" xml:space="preserve" fill="#0969da">| (   ) || |   ) || | \   |</text>
+<text x="28" y="330" xml:space="preserve" fill="#0969da">| )   ( || (__/  )| )  \  |</text>
+<text x="28" y="350" xml:space="preserve" fill="#0969da">|/     \|(______/ |/    )_)</text>
 <text x="300" y="40" xml:space="preserve"><tspan fill="#0969da">adnvilla@github </tspan><tspan fill="#57606a">──────────────────────────────────────────</tspan></text>
 <text x="300" y="60" xml:space="preserve"><tspan fill="#bc4c00">OS:</tspan><tspan fill="#57606a"> ......................................... </tspan><tspan fill="#24292f">macOS, Linux</tspan></text>
-<text x="300" y="80" xml:space="preserve"><tspan fill="#bc4c00">Uptime:</tspan><tspan fill="#57606a"> .... </tspan><tspan fill="#24292f">38 years, 2 months, 14 days, 22 hours, 11 min</tspan></text>
+<text x="300" y="80" xml:space="preserve"><tspan fill="#bc4c00">Uptime:</tspan><tspan fill="#57606a"> .... </tspan><tspan fill="#24292f">38 years, 2 months, 14 days, 22 hours, 15 min</tspan></text>
 <text x="300" y="100" xml:space="preserve"><tspan fill="#bc4c00">Kernel:</tspan><tspan fill="#57606a"> ................... </tspan><tspan fill="#24292f">Works On My Machine™ Certified</tspan></text>
 <text x="300" y="120" xml:space="preserve"><tspan fill="#bc4c00">IDE:</tspan><tspan fill="#57606a"> ................. </tspan><tspan fill="#24292f">Claude Code, Cursor, Codex, VS Code</tspan></text>
-<text x="300" y="160" xml:space="preserve"><tspan fill="#bc4c00">Languages:</tspan><tspan fill="#57606a"> ..................... </tspan><tspan fill="#24292f">Go, C#, Python, Rust, C++</tspan></text>
-<text x="300" y="180" xml:space="preserve"><tspan fill="#bc4c00">Hobbies:</tspan><tspan fill="#57606a"> ........................................... </tspan><tspan fill="#24292f">Chess</tspan></text>
-<text x="300" y="220" xml:space="preserve"><tspan fill="#0969da">─ Contact</tspan></text>
-<text x="300" y="240" xml:space="preserve"><tspan fill="#bc4c00">Email:</tspan><tspan fill="#57606a"> ................................ </tspan><tspan fill="#24292f">adnvilla@gmail.com</tspan></text>
-<text x="300" y="260" xml:space="preserve"><tspan fill="#bc4c00">Blog:</tspan><tspan fill="#57606a"> ................................ </tspan><tspan fill="#24292f">adrianvillafana.com</tspan></text>
-<text x="300" y="280" xml:space="preserve"><tspan fill="#bc4c00">LinkedIn:</tspan><tspan fill="#57606a"> ............................ </tspan><tspan fill="#24292f">in/adrian-villafaña</tspan></text>
-<text x="300" y="320" xml:space="preserve"><tspan fill="#0969da">─ GitHub Stats</tspan></text>
-<text x="300" y="340" xml:space="preserve"><tspan fill="#bc4c00">Repos:</tspan><tspan fill="#57606a"> ... </tspan><tspan fill="#24292f">42 {Contributed: 0}</tspan><tspan fill="#57606a"> | </tspan><tspan fill="#bc4c00">Stars:</tspan><tspan fill="#57606a"> ................ </tspan><tspan fill="#24292f">3</tspan></text>
-<text x="300" y="360" xml:space="preserve"><tspan fill="#bc4c00">Commits:</tspan><tspan fill="#57606a"> ................. </tspan><tspan fill="#24292f">720</tspan><tspan fill="#57606a"> | </tspan><tspan fill="#bc4c00">Followers:</tspan><tspan fill="#57606a"> ........... </tspan><tspan fill="#24292f">31</tspan></text>
-<text x="300" y="380" xml:space="preserve"><tspan fill="#bc4c00">Issues on repos:</tspan><tspan fill="#57606a"> ...................... </tspan><tspan fill="#1a7f37">0 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">28 closed</tspan></text>
-<text x="300" y="400" xml:space="preserve"><tspan fill="#bc4c00">Issues by me:</tspan><tspan fill="#57606a"> ......................... </tspan><tspan fill="#1a7f37">0 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">28 closed</tspan></text>
-<text x="300" y="420" xml:space="preserve"><tspan fill="#bc4c00">PRs on repos:</tspan><tspan fill="#57606a"> ............ </tspan><tspan fill="#1a7f37">8 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#cf222e">23 closed</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">198 merged</tspan></text>
-<text x="300" y="440" xml:space="preserve"><tspan fill="#bc4c00">PRs by me:</tspan><tspan fill="#57606a"> ................ </tspan><tspan fill="#1a7f37">1 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#cf222e">5 closed</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">195 merged</tspan></text>
-<text x="300" y="460" xml:space="preserve"><tspan fill="#bc4c00">Lines of Code: </tspan><tspan fill="#24292f">177,989 </tspan><tspan fill="#57606a">( </tspan><tspan fill="#1a7f37">203,951++</tspan><tspan fill="#57606a">, </tspan><tspan fill="#cf222e">25,962--</tspan><tspan fill="#57606a"> )</tspan></text>
+<text x="300" y="140" xml:space="preserve"><tspan fill="#bc4c00">Memory:</tspan><tspan fill="#57606a"> ............ </tspan><tspan fill="#24292f">99% used (mostly Stack Overflow tabs)</tspan></text>
+<text x="300" y="160" xml:space="preserve"><tspan fill="#bc4c00">Processes:</tspan><tspan fill="#57606a"> ............... </tspan><tspan fill="#24292f">chess.com running in background</tspan></text>
+<text x="300" y="200" xml:space="preserve"><tspan fill="#bc4c00">Languages:</tspan><tspan fill="#57606a"> ..................... </tspan><tspan fill="#24292f">Go, C#, Python, Rust, C++</tspan></text>
+<text x="300" y="220" xml:space="preserve"><tspan fill="#bc4c00">Hobbies:</tspan><tspan fill="#57606a"> ........................................... </tspan><tspan fill="#24292f">Chess</tspan></text>
+<text x="300" y="260" xml:space="preserve"><tspan fill="#0969da">─ Contact</tspan></text>
+<text x="300" y="280" xml:space="preserve"><tspan fill="#bc4c00">Email:</tspan><tspan fill="#57606a"> ................................ </tspan><tspan fill="#24292f">adnvilla@gmail.com</tspan></text>
+<text x="300" y="300" xml:space="preserve"><tspan fill="#bc4c00">Blog:</tspan><tspan fill="#57606a"> ................................ </tspan><tspan fill="#24292f">adrianvillafana.com</tspan></text>
+<text x="300" y="320" xml:space="preserve"><tspan fill="#bc4c00">LinkedIn:</tspan><tspan fill="#57606a"> ............................ </tspan><tspan fill="#24292f">in/adrian-villafaña</tspan></text>
+<text x="300" y="360" xml:space="preserve"><tspan fill="#0969da">─ GitHub Stats</tspan></text>
+<text x="300" y="380" xml:space="preserve"><tspan fill="#bc4c00">Repos:</tspan><tspan fill="#57606a"> ... </tspan><tspan fill="#24292f">42 {Contributed: 0}</tspan><tspan fill="#57606a"> | </tspan><tspan fill="#bc4c00">Stars:</tspan><tspan fill="#57606a"> ................ </tspan><tspan fill="#24292f">3</tspan></text>
+<text x="300" y="400" xml:space="preserve"><tspan fill="#bc4c00">Commits:</tspan><tspan fill="#57606a"> ................. </tspan><tspan fill="#24292f">721</tspan><tspan fill="#57606a"> | </tspan><tspan fill="#bc4c00">Followers:</tspan><tspan fill="#57606a"> ........... </tspan><tspan fill="#24292f">31</tspan></text>
+<text x="300" y="420" xml:space="preserve"><tspan fill="#bc4c00">Contributions:</tspan><tspan fill="#57606a"> ...................... </tspan><tspan fill="#24292f">629 in the last year</tspan></text>
+<text x="300" y="440" xml:space="preserve"><tspan fill="#bc4c00">Issues on repos:</tspan><tspan fill="#57606a"> ...................... </tspan><tspan fill="#1a7f37">0 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">28 closed</tspan></text>
+<text x="300" y="460" xml:space="preserve"><tspan fill="#bc4c00">Issues by me:</tspan><tspan fill="#57606a"> ......................... </tspan><tspan fill="#1a7f37">0 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">28 closed</tspan></text>
+<text x="300" y="480" xml:space="preserve"><tspan fill="#bc4c00">PRs on repos:</tspan><tspan fill="#57606a"> ............ </tspan><tspan fill="#1a7f37">8 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#cf222e">23 closed</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">198 merged</tspan></text>
+<text x="300" y="500" xml:space="preserve"><tspan fill="#bc4c00">PRs by me:</tspan><tspan fill="#57606a"> ................ </tspan><tspan fill="#1a7f37">1 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#cf222e">5 closed</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">195 merged</tspan></text>
+<text x="300" y="520" xml:space="preserve"><tspan fill="#bc4c00">Lines of Code: </tspan><tspan fill="#24292f">177,989 </tspan><tspan fill="#57606a">( </tspan><tspan fill="#1a7f37">203,951++</tspan><tspan fill="#57606a">, </tspan><tspan fill="#cf222e">25,962--</tspan><tspan fill="#57606a"> )</tspan></text>
 </svg>

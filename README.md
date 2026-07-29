@@ -1,33 +1,9 @@
 # Hola, soy adnvilla 👋
 
-```text
-        _______  ______   _
-       (  ___  )(  __  \ ( (    /|
-       | (   ) || (  \  )|  \  ( |
-       | (___) || |   ) ||   \ | |
-       |  ___  || |   | || (\ \) |
-       | (   ) || |   ) || | \   |
-       | )   ( || (__/  )| )  \  |
-       |/     \|(______/ |/    )_)
+<img src="readme.svg" alt="adnvilla" width="900"/>
 
-adnvilla@github
-----------------------------------------
-OS: ........................................................... macOS, Linux
-Uptime: ......................................... 13 years, 8 months, 6 days
-Kernel: .................................................. Software Engineer
-IDE: .................................................. Claude Code, VS Code
-
-Languages: .......................................... Go, C#, HCL, Rust, C++
-
-- GitHub Stats
-Repos: .................................................................. 42
-Stars: ................................................................... 3
-Commits: ............................................................... 556
-Followers: .............................................................. 31
-
-Contact: ................................................ adnvilla@gmail.com
-```
+📝 [Blog](https://adrianvillafana.com/) · 💼 [LinkedIn](https://www.linkedin.com/in/adrian-villafa%C3%B1a/) · ✉️ adnvilla@gmail.com
 
 Repo con las diferentes tecnologias que experimento.
 
-<sub>Actualizado automáticamente: 2026-07-29 13:45 UTC</sub>
+<sub>Actualizado automáticamente: 2026-07-29 14:01 UTC</sub>

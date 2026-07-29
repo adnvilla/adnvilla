@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Regenera readme.svg + README.md con stats de GitHub, estilo neofetch con colores."""
+"""Regenera readme-dark.svg / readme-light.svg + README.md, estilo neofetch."""
 import json
 import os
 import time
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 USER = "adnvilla"
@@ -13,15 +13,28 @@ TOKEN = os.environ.get("GITHUB_TOKEN")
 TZ = ZoneInfo("America/Mexico_City")
 BIRTH = datetime(1988, 5, 14, 10, 30, tzinfo=TZ)
 
-# Paleta (GitHub dark)
-BG = "#0d1117"
-BORDER = "#30363d"
-ORANGE = "#ffa657"
-GRAY = "#8b949e"
-FG = "#c9d1d9"
-BLUE = "#58a6ff"
-GREEN = "#3fb950"
-RED = "#f85149"
+THEMES = {
+    "dark": {
+        "bg": "#0d1117",
+        "border": "#30363d",
+        "label": "#ffa657",
+        "dots": "#8b949e",
+        "fg": "#c9d1d9",
+        "accent": "#58a6ff",
+        "green": "#3fb950",
+        "red": "#f85149",
+    },
+    "light": {
+        "bg": "#ffffff",
+        "border": "#d0d7de",
+        "label": "#bc4c00",
+        "dots": "#57606a",
+        "fg": "#24292f",
+        "accent": "#0969da",
+        "green": "#1a7f37",
+        "red": "#cf222e",
+    },
+}
 
 INFO_W = 58  # ancho en caracteres de la columna de info
 
@@ -152,13 +165,13 @@ ASCII = r"""
 """.strip("\n")
 
 
-def seg_dots(label, value, width, value_color=FG):
+def seg_dots(P, label, value, width, value_color=None):
     value = str(value)
     pad = width - len(label) - len(value) - 2
     return [
-        (label, ORANGE),
-        (" " + "." * max(pad, 3) + " ", GRAY),
-        (value, value_color),
+        (label, P["label"]),
+        (" " + "." * max(pad, 3) + " ", P["dots"]),
+        (value, value_color or P["fg"]),
     ]
 
 
@@ -166,54 +179,54 @@ def esc(t):
     return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def build_lines(s):
-    half = (INFO_W - 3) // 2  # dos campos por línea: "A | B"
-    sep = [(" | ", GRAY)]
+def build_lines(s, P):
+    # Dos campos por línea: ancho izquierdo dinámico para que "|" quede alineado
+    left_pairs = [("Repos:", f'{s["repos"]} {{Contributed: {s["contributed"]}}}'), ("Commits:", f'{s["commits"]:,}')]
+    left_w = max(len(l) + len(v) + 5 for l, v in left_pairs)  # 2 espacios + min 3 dots
+    right_w = INFO_W - left_w - 3
+    sep = [(" | ", P["dots"])]
     lines = [
-        [(f"{USER}@github ", BLUE), ("─" * (INFO_W - len(USER) - 8), GRAY)],
-        seg_dots("OS:", "macOS, Linux", INFO_W),
-        seg_dots("Uptime:", life_uptime(), INFO_W),
-        seg_dots("Kernel:", "Works On My Machine™ Certified", INFO_W),
-        seg_dots("IDE:", "Claude Code, VS Code", INFO_W),
+        [(f"{USER}@github ", P["accent"]), ("─" * (INFO_W - len(USER) - 8), P["dots"])],
+        seg_dots(P, "OS:", "macOS, Linux", INFO_W),
+        seg_dots(P, "Uptime:", life_uptime(), INFO_W),
+        seg_dots(P, "Kernel:", "Works On My Machine™ Certified", INFO_W),
+        seg_dots(P, "IDE:", "Claude Code, VS Code", INFO_W),
         [],
-        seg_dots("Languages:", s["languages"], INFO_W),
-        seg_dots("Hobbies:", "Ajedrez", INFO_W),
+        seg_dots(P, "Languages:", s["languages"], INFO_W),
+        seg_dots(P, "Hobbies:", "Chess", INFO_W),
         [],
-        [("─ Contact", BLUE)],
-        seg_dots("Email:", "adnvilla@gmail.com", INFO_W),
-        seg_dots("Blog:", "adrianvillafana.com", INFO_W),
-        seg_dots("LinkedIn:", "in/adrian-villafaña", INFO_W),
+        [("─ Contact", P["accent"])],
+        seg_dots(P, "Email:", "adnvilla@gmail.com", INFO_W),
+        seg_dots(P, "Blog:", "adrianvillafana.com", INFO_W),
+        seg_dots(P, "LinkedIn:", "in/adrian-villafaña", INFO_W),
         [],
-        [("─ GitHub Stats", BLUE)],
-        seg_dots("Repos:", f'{s["repos"]} {{Contributed: {s["contributed"]}}}', half)
-        + sep
-        + seg_dots("Stars:", f'{s["stars"]:,}', half),
-        seg_dots("Commits:", f'{s["commits"]:,}', half)
-        + sep
-        + seg_dots("Followers:", f'{s["followers"]:,}', half),
+        [("─ GitHub Stats", P["accent"])],
+        seg_dots(P, *left_pairs[0], left_w) + sep + seg_dots(P, "Stars:", f'{s["stars"]:,}', right_w),
+        seg_dots(P, *left_pairs[1], left_w) + sep + seg_dots(P, "Followers:", f'{s["followers"]:,}', right_w),
         [
-            ("Lines of Code: ", ORANGE),
-            (f'{s["loc"]:,} ', FG),
-            ("( ", GRAY),
-            (f'{s["additions"]:,}++', GREEN),
-            (", ", GRAY),
-            (f'{s["deletions"]:,}--', RED),
-            (" )", GRAY),
+            ("Lines of Code: ", P["label"]),
+            (f'{s["loc"]:,} ', P["fg"]),
+            ("( ", P["dots"]),
+            (f'{s["additions"]:,}++', P["green"]),
+            (", ", P["dots"]),
+            (f'{s["deletions"]:,}--', P["red"]),
+            (" )", P["dots"]),
         ],
     ]
     return lines
 
 
-def render_svg(s):
-    char_w = 8.43
+def render_svg(s, theme):
+    P = THEMES[theme]
+    char_w = 8.6
     line_h = 20
     art_lines = ASCII.split("\n")
     art_w = max(len(l) for l in art_lines)
     art_x = 28
     info_x = art_x + int(art_w * char_w) + 40
-    width = info_x + int(INFO_W * char_w) + 28
+    width = info_x + int(INFO_W * char_w) + 34
 
-    info = build_lines(s)
+    info = build_lines(s, P)
     top = 40
     height = top + len(info) * line_h + 24
     art_top = top + ((len(info) - len(art_lines)) * line_h) // 2
@@ -221,11 +234,11 @@ def render_svg(s):
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         "<style>text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 14px; }</style>",
-        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8" fill="{BG}" stroke="{BORDER}"/>',
+        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8" fill="{P["bg"]}" stroke="{P["border"]}"/>',
     ]
     for i, line in enumerate(art_lines):
         parts.append(
-            f'<text x="{art_x}" y="{art_top + i * line_h}" xml:space="preserve" fill="{BLUE}">{esc(line)}</text>'
+            f'<text x="{art_x}" y="{art_top + i * line_h}" xml:space="preserve" fill="{P["accent"]}">{esc(line)}</text>'
         )
     for i, segments in enumerate(info):
         if not segments:
@@ -236,24 +249,22 @@ def render_svg(s):
     return "\n".join(parts)
 
 
-README_TEMPLATE = """# Hola, soy adnvilla 👋
-
-<img src="readme.svg" alt="adnvilla" width="900"/>
-
-📝 [Blog](https://adrianvillafana.com/) · 💼 [LinkedIn](https://www.linkedin.com/in/adrian-villafa%C3%B1a/) · ✉️ adnvilla@gmail.com
-
-Repo con las diferentes tecnologias que experimento.
-
-<sub>Actualizado automáticamente: {updated}</sub>
+README_TEMPLATE = """<a href="https://adrianvillafana.com/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="readme-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="readme-light.svg">
+    <img src="readme-dark.svg" alt="adnvilla" width="900">
+  </picture>
+</a>
 """
 
 
 if __name__ == "__main__":
     root = os.path.join(os.path.dirname(__file__), "..")
     stats = fetch_stats()
-    with open(os.path.join(root, "readme.svg"), "w") as f:
-        f.write(render_svg(stats))
-    updated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    for theme in THEMES:
+        with open(os.path.join(root, f"readme-{theme}.svg"), "w") as f:
+            f.write(render_svg(stats, theme))
     with open(os.path.join(root, "README.md"), "w") as f:
-        f.write(README_TEMPLATE.format(updated=updated))
-    print("readme.svg + README.md regenerados")
+        f.write(README_TEMPLATE)
+    print("readme-dark.svg + readme-light.svg + README.md regenerados")

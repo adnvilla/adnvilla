@@ -1,9 +1,7 @@
-# Hola, soy adnvilla 👋
-
-<img src="readme.svg" alt="adnvilla" width="900"/>
-
-📝 [Blog](https://adrianvillafana.com/) · 💼 [LinkedIn](https://www.linkedin.com/in/adrian-villafa%C3%B1a/) · ✉️ adnvilla@gmail.com
-
-Repo con las diferentes tecnologias que experimento.
-
-<sub>Actualizado automáticamente: 2026-07-29 14:01 UTC</sub>
+<a href="https://adrianvillafana.com/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="readme-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="readme-light.svg">
+    <img src="readme-dark.svg" alt="adnvilla" width="900">
+  </picture>
+</a>

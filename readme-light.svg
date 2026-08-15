@@ -22,7 +22,7 @@
 <text x="28" y="460" xml:space="preserve" fill="#007d9c">   |                           |</text>
 <text x="360" y="40" xml:space="preserve"><tspan fill="#0969da">adnvilla@github </tspan><tspan fill="#57606a">──────────────────────────────────────────</tspan></text>
 <text x="360" y="60" xml:space="preserve"><tspan fill="#bc4c00">OS:</tspan><tspan fill="#57606a"> ......................................... </tspan><tspan fill="#24292f">macOS, Linux</tspan></text>
-<text x="360" y="80" xml:space="preserve"><tspan fill="#bc4c00">Uptime:</tspan><tspan fill="#57606a"> .... </tspan><tspan fill="#24292f">38 years, 2 months, 30 days, 15 hours, 13 min</tspan></text>
+<text x="360" y="80" xml:space="preserve"><tspan fill="#bc4c00">Uptime:</tspan><tspan fill="#57606a"> ..... </tspan><tspan fill="#24292f">38 years, 3 months, 0 days, 14 hours, 18 min</tspan></text>
 <text x="360" y="100" xml:space="preserve"><tspan fill="#bc4c00">Kernel:</tspan><tspan fill="#57606a"> ................... </tspan><tspan fill="#24292f">Works On My Machine™ Certified</tspan></text>
 <text x="360" y="120" xml:space="preserve"><tspan fill="#bc4c00">IDE:</tspan><tspan fill="#57606a"> ................. </tspan><tspan fill="#24292f">Claude Code, Cursor, Codex, VS Code</tspan></text>
 <text x="360" y="140" xml:space="preserve"><tspan fill="#bc4c00">Memory:</tspan><tspan fill="#57606a"> ............ </tspan><tspan fill="#24292f">99% used (mostly Stack Overflow tabs)</tspan></text>
@@ -35,7 +35,7 @@
 <text x="360" y="340" xml:space="preserve"><tspan fill="#0969da">─ GitHub Stats</tspan></text>
 <text x="360" y="360" xml:space="preserve"><tspan fill="#bc4c00">Repos:</tspan><tspan fill="#57606a"> ... </tspan><tspan fill="#24292f">42 {Contributed: 0}</tspan><tspan fill="#57606a"> | </tspan><tspan fill="#bc4c00">Stars:</tspan><tspan fill="#57606a"> ................ </tspan><tspan fill="#24292f">3</tspan></text>
 <text x="360" y="380" xml:space="preserve"><tspan fill="#bc4c00">Commits:</tspan><tspan fill="#57606a"> ................. </tspan><tspan fill="#24292f">564</tspan><tspan fill="#57606a"> | </tspan><tspan fill="#bc4c00">Followers:</tspan><tspan fill="#57606a"> ........... </tspan><tspan fill="#24292f">31</tspan></text>
-<text x="360" y="400" xml:space="preserve"><tspan fill="#bc4c00">Contributions:</tspan><tspan fill="#57606a"> ...................... </tspan><tspan fill="#24292f">668 in the last year</tspan></text>
+<text x="360" y="400" xml:space="preserve"><tspan fill="#bc4c00">Contributions:</tspan><tspan fill="#57606a"> ...................... </tspan><tspan fill="#24292f">682 in the last year</tspan></text>
 <text x="360" y="420" xml:space="preserve"><tspan fill="#bc4c00">Issues on repos:</tspan><tspan fill="#57606a"> ...................... </tspan><tspan fill="#1a7f37">0 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">17 closed</tspan></text>
 <text x="360" y="440" xml:space="preserve"><tspan fill="#bc4c00">Issues by me:</tspan><tspan fill="#57606a"> ......................... </tspan><tspan fill="#1a7f37">0 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">17 closed</tspan></text>
 <text x="360" y="460" xml:space="preserve"><tspan fill="#bc4c00">PRs on repos:</tspan><tspan fill="#57606a"> ............ </tspan><tspan fill="#1a7f37">7 open</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#cf222e">23 closed</tspan><tspan fill="#57606a"> / </tspan><tspan fill="#8250df">159 merged</tspan></text>

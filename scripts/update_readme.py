@@ -10,7 +10,9 @@ from zoneinfo import ZoneInfo
 
 USER = "adnvilla"
 API = "https://api.github.com"
-TOKEN = os.environ.get("GITHUB_TOKEN")
+# PAT del usuario (secret STATS_TOKEN). El GITHUB_TOKEN del workflow solo ve este repo.
+USER_TOKEN = os.environ.get("STATS_TOKEN") or ""
+TOKEN = USER_TOKEN or os.environ.get("GITHUB_TOKEN") or ""
 TZ = ZoneInfo("America/Mexico_City")
 BIRTH = datetime(1988, 5, 14, 10, 30, tzinfo=TZ)
 
@@ -87,29 +89,43 @@ def life_uptime():
 
 
 def contributors_stats(repo):
-    """stats/contributors devuelve 202 mientras GitHub calcula; reintenta."""
+    """stats/contributors devuelve 202 mientras GitHub calcula; reintenta solo ese caso."""
     url = f"{API}/repos/{USER}/{repo}/stats/contributors"
-    for _ in range(4):
+    for _ in range(6):
         try:
             status, body = _request(url)
         except Exception:
             return []
         if status == 200 and body:
             return json.loads(body)
-        time.sleep(2)
+        if status != 202:
+            return []
+        time.sleep(3)
     return []
 
 
-def fetch_stats():
-    user = get(f"{API}/users/{USER}")
+def list_repos():
+    """Con el PAT, /user/repos incluye privados. /users/{user}/repos nunca los devuelve."""
+    if USER_TOKEN:
+        base = f"{API}/user/repos?visibility=all&affiliation=owner&per_page=100&page="
+    else:
+        base = f"{API}/users/{USER}/repos?per_page=100&page="
     repos = []
     page = 1
     while True:
-        batch = get(f"{API}/users/{USER}/repos?per_page=100&page={page}")
+        batch = get(base + str(page))
         repos.extend(batch)
         if len(batch) < 100:
             break
         page += 1
+    return repos
+
+
+def fetch_stats():
+    user = get(f"{API}/users/{USER}")
+    repos = list_repos()
+    private = sum(1 for r in repos if r.get("private"))
+    print(f"repos listados: {len(repos)} (privados: {private})")
 
     stars = sum(r["stargazers_count"] for r in repos)
 
@@ -125,7 +141,12 @@ def fetch_stats():
     contributions = 0
     if TOKEN:
         try:
-            q = f'{{ user(login: "{USER}") {{ repositoriesContributedTo(contributionTypes: [COMMIT, PULL_REQUEST], first: 1) {{ totalCount }} contributionsCollection {{ contributionCalendar {{ totalContributions }} }} }} }}'
+            own = "true" if USER_TOKEN else "false"
+            q = (
+                f'{{ user(login: "{USER}") {{ repositoriesContributedTo'
+                f"(contributionTypes: [COMMIT, PULL_REQUEST], includeUserRepositories: {own}, first: 1) "
+                f"{{ totalCount }} contributionsCollection {{ contributionCalendar {{ totalContributions }} }} }} }}"
+            )
             u = graphql(q)["data"]["user"]
             contributed = u["repositoriesContributedTo"]["totalCount"]
             contributions = u["contributionsCollection"]["contributionCalendar"]["totalContributions"]
@@ -168,7 +189,7 @@ def fetch_stats():
     top_langs = ", ".join(sorted(langs, key=langs.get, reverse=True)[:5])
 
     return {
-        "repos": user["public_repos"],
+        "repos": user["public_repos"] + user.get("owned_private_repos", 0),
         "contributed": contributed,
         "contributions": contributions,
         "stars": stars,
@@ -341,6 +362,10 @@ README_TEMPLATE = """<a href="https://adrianvillafana.com/">
 
 
 if __name__ == "__main__":
+    if USER_TOKEN:
+        print("STATS_TOKEN presente: se incluyen repos privados")
+    else:
+        print("STATS_TOKEN ausente: solo repos públicos")
     root = os.path.join(os.path.dirname(__file__), "..")
     stats = fetch_stats()
     for theme in THEMES:
